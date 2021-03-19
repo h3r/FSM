@@ -3,7 +3,7 @@ Author: Hermann Plass (hermann.plass@gmail.com)
 editor.js (c) 2021
 Desc: description
 Created:  2021-03-18T18:53:56.258Z
-Modified: 2021-03-19T10:40:05.464Z
+Modified: 2021-03-19T10:46:23.447Z
 */
 
 import fs from 'browserify-fs';
@@ -98,10 +98,16 @@ export default class Editor extends React.Component {
     componentDidMount()
     {
         document.body.addEventListener('keydown',this.HandleKeyPress );
-        LEvent.bind(window, "reload", ()=>{ console.log('reload!!')});
-        LEvent.bind(window, "download", this.downloadFile );
-        LEvent.bind(window, "clear", ()=>{ console.log('clear!!')});
         LEvent.bind(window, "nodeUpdate", this.onNodeUpdate );
+        LEvent.bind(window, "download", this.downloadFile );
+        LEvent.bind(window, "clear", ()=>{ 
+            if(window.confirm("Changes will be lost"))
+            window.location.replace("/");
+        });
+        LEvent.bind(window, "reload", ()=>{ 
+            if(window.confirm("Changes will be lost"))
+            window.location.replace(window.location);
+        });
     }
 
     //Called when the element is going to be removed because of an interface update/switching pages/etc
