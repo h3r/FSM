@@ -3,7 +3,7 @@ Author: Hermann Plass (hermann.plass@gmail.com)
 nodes.js (c) 2021
 Desc: description
 Created:  2021-03-18T20:38:03.260Z
-Modified: 2021-03-19T09:36:43.190Z
+Modified: 2021-03-19T10:21:12.701Z
 */
 
 import fs from 'browserify-fs';
@@ -54,9 +54,9 @@ export default () => {
       </ButtonGroup >
       
       <h3>Nodes</h3>
-      <div className = "inputnode"    onDragStart = {(event) => onDragStart(event, 'input')}   draggable> Input Node   </div>
-      <div className = "customnode"  onDragStart = {(event) => onDragStart(event, 'customnode')} draggable> Default Node </div>
-      <div className = "outputnode"   onDragStart = {(event) => onDragStart(event, 'output')}  draggable> Output Node  </div>
+      <div className = "inputnode"  onDragStart = {(event) => onDragStart(event, 'input')}      draggable> Input Node   </div>
+      <div className = "customnode" onDragStart = {(event) => onDragStart(event, 'customnode')} draggable> Default Node </div>
+      <div className = "outputnode" onDragStart = {(event) => onDragStart(event, 'output')}     draggable> Output Node  </div>
       <CtxData/>
       {/*<AceEditor
         placeholder="Placeholder Text"

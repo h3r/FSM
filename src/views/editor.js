@@ -3,7 +3,7 @@ Author: Hermann Plass (hermann.plass@gmail.com)
 editor.js (c) 2021
 Desc: description
 Created:  2021-03-18T18:53:56.258Z
-Modified: 2021-03-19T10:13:28.495Z
+Modified: 2021-03-19T10:40:05.464Z
 */
 
 import fs from 'browserify-fs';
@@ -35,12 +35,16 @@ const initialElements = [
         id      : 'anytime',
         type    : 'input',
         data    : { label: 'Anytime', Background: "#73BDD5" },
+        sourcePosition:"right",
+        targetPosition:"left",
         position: { x: 0, y: -50 },
     },
     {
         id      : 'root',
         type    : 'input',
         data    : { label: 'Default', Background: "#FFC61B" },
+        sourcePosition:"right",
+        targetPosition:"left",
         position: { x: 0, y: 50 },
     },
 
@@ -209,7 +213,7 @@ export default class Editor extends React.Component {
     {
         let { elements } = this.state;
         let v = elements.find( v => v.id == node.id );
-        v.position = node.position;
+        v = node;
         this.setState({ elements });
     }
     
@@ -230,7 +234,7 @@ export default class Editor extends React.Component {
           id: window.getId(),
           type,
           position,
-          style: { width: 110, fontSize: 11 },
+          style: { fontSize: 11 },
           data: { label: `${type} node` },
         };
         

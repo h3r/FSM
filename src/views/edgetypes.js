@@ -3,7 +3,7 @@ Author: Hermann Plass (hermann.plass@gmail.com)
 edgetypes.js (c) 2021
 Desc: description
 Created:  2021-03-19T09:12:31.164Z
-Modified: 2021-03-19T09:18:11.947Z
+Modified: 2021-03-19T10:20:42.797Z
 */
 
 import React from 'react';
