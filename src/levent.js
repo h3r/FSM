@@ -9,7 +9,7 @@
 * @constructor
 */
 
-var LEvent = global.LEvent = GL.LEvent = {
+var LEvent = global.LEvent = window.LEvent = {
 
 	/**
 	* Binds an event to an instance
@@ -138,8 +138,7 @@ var LEvent = global.LEvent = GL.LEvent = {
 		if(!events)
 			return;
 		delete events[ event_type ];
-		if( instance.onLEventUnbindAll )
-			instance.onLEventUnbindAll( event_type, target_instance, callback );
+		//if( instance.onLEventUnbindAll )instance.onLEventUnbindAll( event_type, target_instance, callback );
 		return;
 	},
 
@@ -369,7 +368,7 @@ var LEvent = global.LEvent = GL.LEvent = {
 
 		object.unbind = function( event_type, callback, target_instance )
 		{
-			return LEvent.unbind( this, event_type, callback, instance );
+			return LEvent.unbind( this, event_type, callback, target_instance );
 		};
 
 		object.unbindAll = function( target_instance, callback )
