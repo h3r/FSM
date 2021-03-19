@@ -3,7 +3,7 @@ Author: Hermann Plass (hermann.plass@gmail.com)
 nodetypes.js (c) 2021
 Desc: description
 Created:  2021-03-19T01:23:50.809Z
-Modified: 2021-03-19T09:37:34.135Z
+Modified: 2021-03-19T10:12:20.287Z
 */
 import React from 'react';
 import { addEdge, Handle } from 'react-flow-renderer';
@@ -22,7 +22,7 @@ class CustomNode extends React.Component {
     onChange(params)
     {
         this.props.data.label = params.target.value;
-        LEvent.trigger(window, 'nodeUpdate', this);
+        LEvent.trigger(window, 'nodeUpdate', this.props);
     }
 
     render(){

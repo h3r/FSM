@@ -3,7 +3,7 @@ Author: Hermann Plass (hermann.plass@gmail.com)
 editor.js (c) 2021
 Desc: description
 Created:  2021-03-18T18:53:56.258Z
-Modified: 2021-03-19T10:03:46.208Z
+Modified: 2021-03-19T10:13:28.495Z
 */
 
 import fs from 'browserify-fs';
@@ -258,7 +258,10 @@ export default class Editor extends React.Component {
 
     onNodeUpdate(eventname, node)
     {
-        debugger;
+        let { elements } = this.state;
+        let v = elements.find( v => v.id == node.id );
+        v = node;
+        this.setState({ elements });
     }
 
 
