@@ -3,7 +3,7 @@ Author: Hermann Plass (hermann.plass@gmail.com)
 editor.js (c) 2021
 Desc: description
 Created:  2021-03-18T18:53:56.258Z
-Modified: 2021-03-19T10:46:23.447Z
+Modified: 2021-03-20T19:02:52.015Z
 */
 
 import fs from 'browserify-fs';
@@ -25,7 +25,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import "../levent.js";
 import fsm from "../fsm/fsm.js";
-import NodePanel from './nodepanel.js';
+import Inspector from './inspector.js';
 import nodeTypes from './nodetypes.js';
 import edgeTypes from './edgetypes.js';
 
@@ -35,6 +35,7 @@ const initialElements = [
         id      : 'anytime',
         type    : 'input',
         data    : { label: 'Anytime', Background: "#73BDD5" },
+        style   : {background:'#333333', color:'#DDD'},
         sourcePosition:"right",
         targetPosition:"left",
         position: { x: 0, y: -50 },
@@ -43,6 +44,7 @@ const initialElements = [
         id      : 'root',
         type    : 'input',
         data    : { label: 'Default', Background: "#FFC61B" },
+        style   : {background:'#333333', color:'#DDD'},
         sourcePosition:"right",
         targetPosition:"left",
         position: { x: 0, y: 50 },
@@ -58,9 +60,10 @@ export default class Editor extends React.Component {
     //we store all internal state here, that is mutable, using setState forces re-render this element
     state = {
         filename:"",
+        darkmode: true,
         instance: null,
         elements: initialElements,
-        history: [] //TODO: CTRL+Z check https://reactflow.dev/examples/save-and-restore/
+        history: [], //TODO: CTRL+Z check https://reactflow.dev/examples/save-and-restore/
     }
 
     //props are inmutable properties passed from those who constructed this element
@@ -159,8 +162,8 @@ export default class Editor extends React.Component {
         let filename = this.props.match.params.filename ?? prompt('Save File: enter a title', 'test');
         let data     = JSON.stringify(this.state.elements);
         var that = this;
-        fs.writeFile(`/data/${filename}.fsm`, data, 'utf-8', ()=>{
-            console.log(`File writed: /data/${filename}.fsm`);
+        fs.writeFile(`/files/${filename}.fsm`, data, 'utf-8', ()=>{
+            console.log(`File writed: /files/${filename}.fsm`);
             if( !that.props.match.params.filename )
                 window.location.replace(`/${filename}`);
         });
@@ -172,10 +175,13 @@ export default class Editor extends React.Component {
         if(!filename) return;
         var that = this;
 
-        fs.readFile(`/data/${filename}.fsm`, 'utf-8', function(err, data) {
+        fs.readFile(`/files/${filename}.fsm`, 'utf-8', function(err, data) {
+            if(!data) 
+                return console.error(`File not found: /files/${filename}.fsm`);
+
             let elements     = JSON.parse(data);
             that.setState({elements});
-            console.log(`File loaded: /data/${filename}.fsm`)
+            console.log(`File loaded: /files/${filename}.fsm`)
         });
     }
 
@@ -240,7 +246,6 @@ export default class Editor extends React.Component {
           id: window.getId(),
           type,
           position,
-          style: { fontSize: 11 },
           data: { label: `${type} node` },
         };
         
@@ -280,13 +285,13 @@ export default class Editor extends React.Component {
         return (
         <ReactFlowProvider>
         <Container fluid >
-            <Row>
+            <Row noGutters={true} >
 
             <Col xs='auto'>
-                <NodePanel/>
+                <Inspector/>
             </Col>
 
-            <Col ref={this.reactFlowWrapper}>
+            <Col ref={this.reactFlowWrapper} style={{padding:0}}>
                 <ReactFlow style={{ height: '100vh' }}
                     deleteKeyCode    = {46}
                     snapToGrid={true}
@@ -294,20 +299,21 @@ export default class Editor extends React.Component {
                     defaultZoom={2}
 
                     elements         = {this.state.elements}
-                    onConnect        = {this.onConnect}
-                    onElementsRemove = {this.onElementsRemove}
                     onLoad           = {this.onLoad}
                     onDrop           = {this.onDrop}
+                    onElementsRemove = {this.onElementsRemove}
+                    onConnect        = {this.onConnect}
                     onDragOver       = {this.onDragOver}
                     onEdgeUpdate     = {this.onEdgeUpdate}
                     onNodeDragStop   = {this.onNodeDragStop}
-
-                    nodeTypes = {nodeTypes}
+                    connectionMode   = {'loose'}
+                    nodeTypes        = {nodeTypes}
+                    edgeTypes        = {edgeTypes}
                 
                 >
                     <MiniMap />
                     <Controls />
-                    <Background color="#aaa" gap={16}/>
+                    <Background variant="lines" color="#000" gap={16}/>
                 </ReactFlow>
             </Col>
             </Row>

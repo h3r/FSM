@@ -6,6 +6,7 @@
     "ace-builds": "^1.4.12",
     "bootstrap": "^5.0.0-alpha1",
     "browserify-fs": "^1.0.0",
+    "node-sass": "^5.0.0",
     "react": "^17.0.1",
     "react-ace": "^9.3.0",
     "react-bootstrap": "^1.5.2",
@@ -15,6 +16,8 @@
     "react-fs-treeview": "^0.1.10",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "sass": "^1.32.8",
+    "sass-loader": "^10.1.1",
     "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },

@@ -1,0 +1,208 @@
+/*
+Author: Hermann Plass (hermann.plass@gmail.com)
+style.css (c) 2021
+Desc: description
+Created:  2021-03-18T20:07:57.694Z
+Modified: 2021-03-20T20:08:46.179Z
+*/
+
+//App colors
+
+$primary : #fdfffc;
+$secondary: #011627;
+
+$cA: #2ec4b6;
+$cA-dark:  darken($cA, 50%);
+$cA-light: lighten($cA, 50%);
+
+$cB: #e71d36;
+$cB-dark:  darken($cB, 50%);
+$cB-light: lighten($cB, 50%);
+
+$cC: #ff9f1c;
+$cC-dark:  darken($cC, 50%);
+$cC-light: lighten($cC, 50%);
+
+
+html, body 
+{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+//General Properties for ALL types of nodes
+.react-flow
+{
+    background: $secondary;
+
+    .react-flow__node
+    {
+        font-size: .1rem;
+
+        .react-flow__handle {
+            position: absolute;
+            width:100%;
+            width: 10px;
+            height: 10px;
+            background: #555;
+            border: 1px solid #fff;
+            border-radius: 50%;
+        }
+
+        .react-flow__handle-valid{
+            background: green;
+        }
+        
+        .react-flow__handle-connecting{
+            background: red;
+        }
+    }
+
+    .react-flow__edge
+    {
+        textPath {
+            fill: $primary;
+        }
+    }
+
+}
+
+
+//Specific rules
+.react-flow__node-customnode
+{
+    //background-color: rgba(255,0,0,.1);
+    width:3rem;
+    height:3rem;
+    align-items: center;
+
+    $size: 2rem;
+
+    .label
+    {
+        width: ($size * 1.5) !important;
+        height: $size !important;
+        
+        position:relative;
+        top: 4px;
+        
+        color: $primary;
+        //font-size: .5rem;
+        text-align: center !important;
+
+        background-image: linear-gradient(90deg, $cA,$cA) !important;
+
+        &::after, &::before{
+            display: none;
+        }
+    }
+    
+
+    .react-flow__handle
+    {
+        $scale : 1.25;
+        top:0;
+        width: ($size * 1.25 * $scale) !important;
+        height:($size * $scale) !important;
+
+        
+        background-image: linear-gradient(90deg, #333, #333) !important;
+        z-index: -1;
+        
+        &::after, &::before{
+            display: none;
+        }
+    }
+    
+}
+
+.react-flow__node-randomnode
+{
+    //background-color: rgba(255,0,0,.1);
+    width:3rem;
+    height:3rem;
+    align-items: center;
+
+    .label
+    {
+        $size: 2rem;
+        width: ($size * 0.65) !important;
+        height: $size !important;
+        
+        position:relative;
+        top: 4px;
+        
+        color: $primary;
+        font-size: 1.25rem;
+        text-align: center !important;
+
+        background-image: linear-gradient(90deg, $cB,$cB) !important;
+    }
+
+    .react-flow__handle
+    {
+        background-image: linear-gradient(90deg, #333, #333) !important;
+        z-index: -1;
+    }
+    
+}
+
+
+
+.hexagon {
+
+    $hexagon-size: 48px;
+    $hexagon-color-1: #00ffb8;
+    $hexagon-color-2: #13ce9a;
+    background-image: linear-gradient(90deg, $hexagon-color-1, $hexagon-color-2) !important;
+    
+    width: ($hexagon-size * 0.62) !important;
+    height: $hexagon-size !important;
+
+    border-radius: ($hexagon-size / 10) !important;
+    border-radius: 4px !important;
+    
+    border:0 !important;
+    transition: transform 400ms ease;
+    
+    &:hover {
+      //transform: rotate(30deg);
+    }
+      
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: inherit;
+      height: inherit;
+      background-image: inherit;
+      border-radius: 3px;
+      z-index:-1;
+    }
+      
+    &:before {
+      transform: rotate(60deg);
+    }
+    
+    &:after {
+      transform: rotate(-60deg);
+    }
+  }
+  
+  // Base Styling
+  
+  .center {
+    position: fixed;
+    //top: 0 !important;
+    //left: -50%;
+    transform: translate(50%, 7%);
+    //transform: translate(-50%, -100%) !important;
+  }

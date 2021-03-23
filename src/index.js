@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Drive  from './views/drive.js';
 import Editor from './views/editor.js';
 
-import './style.css';
+import './style.scss';
 
 ReactDOM.render(
   <React.StrictMode>
